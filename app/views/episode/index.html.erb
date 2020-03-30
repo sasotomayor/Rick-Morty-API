@@ -1,0 +1,64 @@
+<h1>Rick & Morty episodes</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 mt-5">
+      <% if flash[:alert] %>
+        <div class="alert alert-warning"><%= flash[:alert] %></div>
+      <% end %>
+      <div class="mx-auto mt-5" style="width: 400px">
+        <%= form_with(url: search_path, method: 'get', local: true) do %>
+          <div class="form-group">
+            <h4><%= label_tag :id, 'Search for an Rick & Morty episode'%></h4>
+            <%= text_field_tag :id, nil, placeholder: 'Eg. 1', class: 'form-control' %>
+          </div>
+          <p></p>
+          <%= button_tag 'Search', class: 'btn btn-success btn-block' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+<div class="container">
+  <p></p>
+</div>
+
+  <h4>Check the full list of Rick & Morty episodes</h4>
+
+  <% @episode["results"].each do |ep| %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 mt-5">
+          <% if flash[:alert] %>
+            <div class="alert alert-warning"><%= flash[:alert] %></div>
+          <% end %>
+          <div class="mx-auto mt-5" style="width: 400px">
+            <h5> Episode <%= ep["episode"] %>: <%= ep["name"] %><h5/>
+            <h8> Air date: <%= ep["air_date"] %></h8>
+            <p><%= link_to "View episode information", episodes_path(:id => ep["id"]) %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <% end %>
+
+  <% @episode2["results"].each do |ep| %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 mt-5">
+          <% if flash[:alert] %>
+            <div class="alert alert-warning"><%= flash[:alert] %></div>
+          <% end %>
+          <div class="mx-auto mt-5" style="width: 400px">
+            <h5> Episode <%= ep["episode"] %>: <%= ep["name"] %><h5/>
+            <h8> Air date: <%= ep["air_date"] %></h8>
+            <p><%= link_to "View episode information", episodes_path(ep["id"]) %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <% end %>
