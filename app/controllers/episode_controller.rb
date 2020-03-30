@@ -89,7 +89,6 @@ class EpisodeController < ApplicationController
     @characters.each do |ch|
       @list.append(find_character(ch))
     end
-    #@image = request_api(@list.first["image"])
   end
 
 end

@@ -4,6 +4,7 @@
   <div class="row mt-5">
     <div class="col-lg-6">
       <h4> Character info: <%= @character["name"] %></h4>
+      <img src=<%= @character["image"] %>>
       <dl>
         <dt>Status: <%= @character["status"] %> </dt>
         <dt>Specie: <%= @character["species"] %> </dt>
@@ -11,7 +12,6 @@
         <dt>Gender: <%= @character["gender"] %> </dt>
         <dt>Origin: <%= link_to @character["origin"]["name"], place_path(:place => @origin) %> </dt>
         <dt>Location: <%= link_to @character["location"]["name"], place_path(:place => @location) %> </dt>
-        <dt>Image: <%= @character["image"] %> </dt>
         <dt>Episodes:</dt>
         <% @list.each do |ep| %>
             <dt><%= link_to ep["name"], episodes_path(:id => ep["id"], :characters => ep["characters"]) %></dt>
