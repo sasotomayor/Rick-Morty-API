@@ -1,4 +1,4 @@
-<h1>Rick & Morty episodes</h1>
+<h1>The Rick & Morty App</h1>
 
 <div class="container">
   <div class="row mt-5">
@@ -7,9 +7,9 @@
       <h5> Additional information </h5>
       <dl>
         <p>Air Date: <%= @episode["air_date"] %></p>
-        <p>Characters</p>
-        <% @episode["characters"].each do |ch| %>
-          <p><%= ch %></p>
+        <p> Characters: </p>
+        <% @list.each do |ch| %>
+          <p><%= link_to ch["name"], character_path(:character => ch) %></p>
         <% end %>
       </dl>
     </div>

@@ -1,0 +1,17 @@
+<h1>The Rick & Morty App</h1>
+
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-lg-6">
+      <h4> Location info: <%= @place["name"] %></h4>
+      <dl>
+        <dt>Type: <%= @place["type"] %> </dt>
+        <dt>Dimension: <%= @place["dimension"] %> </dt>
+        <dt>Residents:</dt>
+        <% @list.each do |r| %>
+            <dt><%= link_to r["name"], character_path(:character => r) %></dt>
+        <% end %>
+      </dl>
+    </div>
+  </div>
+</div>

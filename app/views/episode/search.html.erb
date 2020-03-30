@@ -1,14 +1,50 @@
-<h1>Rick & Morty episodes</h1>
-<p>Check the full list of Rick & Morty episodes</p>
+<h1>The Rick & Morty App</h1>
+<h4>Check your search results</h4>
 
-<div class="container">
-  <div class="row mt-5">
-    <div class="col-lg-6">
-      <h4>Episode info</h4>
-      <dl>
-        <dt>Episode</dt>
-        <dd><%= @episode["name"] %></dd>
-      </dl>
-    </div>
+<% if (@episode != nil) %>
+  <div class="container">
+    <% @episode["results"].each do |ep| %>
+      <div class="row mt-5">
+        <div class="col-lg-6">
+          <dl>
+            <dt>Episode</dt>
+            <p><%= link_to ep["name"], episodes_path(:id => ep["id"]) %></p>
+          </dl>
+        </div>
+      </div>
+    <% end %>
   </div>
-</div>
+<% else %>
+<% end %>
+
+<% if (@character != nil) %>
+  <% @character["results"].each do |ch| %>
+    <div class="container">
+      <div class="row mt-5">
+        <div class="col-lg-6">
+          <dl>
+            <dt>Character</dt>
+            <p><%= link_to ch["name"], character_path(:character => ch) %></p>
+          </dl>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+<% end %>
+
+<% if (@location != nil) %>
+  <div class="container">
+    <% @location["results"].each do |loc| %>
+      <div class="row mt-5">
+        <div class="col-lg-6">
+          <dl>
+            <dt>Location</dt>
+            <p><%= link_to loc["name"], place_path(:place => loc) %></p>
+          </dl>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+<% end %>

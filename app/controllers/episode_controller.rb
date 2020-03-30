@@ -4,15 +4,38 @@ class EpisodeController < ApplicationController
     @episode2 = find_allepisodes2
   end
 
-  def search
-    episodes = find_episode(params[:id])
-    unless episodes
-      flash[:alert] = 'Episode not found'
-      return render action: :index
+  def character
+    @character = params[:character]
+    @list = []
+    @character["episode"].each do |ep|
+      @list.append(find_character(ep))
     end
+    @origin = find_character(@character["origin"]["url"])
+    @location = find_character(@character["location"]["url"])
+  end
+
+  def place
+    @place = params[:place]
+    @list = []
+    @place["residents"].each do |r|
+      @list.append(find_character(r))
+    end
+  end
+
+  def search
+    name = params[:id]
+    episodes = find_episodebyname(name)
+    characters = find_characterbyname(name)
+    locations = find_locationbyname(name)
+
 
     @episode = episodes
+
+    @character = characters
+
+    @location = locations
   end
+
 
   def request_api(url)
     response = Excon.get(
@@ -29,12 +52,28 @@ class EpisodeController < ApplicationController
     request_api("https://rickandmortyapi.com/api/episode/#{URI.encode(episode)}")
   end
 
+  def find_episodebyname(name)
+    request_api("https://rickandmortyapi.com/api/episode/?name=#{URI.encode(name)}")
+  end
+
+  def find_characterbyname(name)
+    request_api("https://rickandmortyapi.com/api/character/?name=#{URI.encode(name)}")
+  end
+
+  def find_locationbyname(name)
+    request_api("https://rickandmortyapi.com/api/location/?name=#{URI.encode(name)}")
+  end
+
   def find_allespisodes1
     request_api("https://rickandmortyapi.com/api/episode/")
   end
 
   def find_allepisodes2
     request_api("https://rickandmortyapi.com/api/episode?page=2")
+  end
+
+  def find_character(character)
+    request_api("#{URI.encode(character)}")
   end
 
   def episodes
@@ -44,8 +83,13 @@ class EpisodeController < ApplicationController
       flash[:alert] = 'Episode not found'
       return render action: :index
     end
-
+    @list = []
     @episode = episodes
+    @characters = episodes["characters"]
+    @characters.each do |ch|
+      @list.append(find_character(ch))
+    end
+    #@image = request_api(@list.first["image"])
   end
 
 end
