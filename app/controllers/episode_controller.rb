@@ -10,7 +10,10 @@ class EpisodeController < ApplicationController
     @character["episode"].each do |ep|
       @list.append(find_character(ep))
     end
-    @origin = find_character(@character["origin"]["url"])
+    if (@character["origin"]["url"] != "")
+      @origin = find_character(@character["origin"]["url"])
+    else
+    end
     @location = find_character(@character["location"]["url"])
   end
 

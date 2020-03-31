@@ -8,7 +8,11 @@
         <dt>Specie: <%= @character["species"] %> </dt>
         <dt>Type: <%= @character["type"] %> </dt>
         <dt>Gender: <%= @character["gender"] %> </dt>
-        <dt>Origin: <%= link_to @character["origin"]["name"], place_path(:place => @origin) %> </dt>
+        <% if (@character["origin"]["name"] != "unknown") %>
+          <dt>Origin: <%= link_to @character["origin"]["name"], place_path(:place => @origin) %> </dt>
+        <% else %>
+          <dt>Origin: unknown </dt>
+        <% end %>
         <dt>Location: <%= link_to @character["location"]["name"], place_path(:place => @location) %> </dt>
         <dt>Episodes:</dt>
         <% @list.each do |ep| %>
