@@ -52,27 +52,27 @@ class EpisodeController < ApplicationController
   end
 
   def find_episode(episode)
-    request_api("https://rickandmortyapi.com/api/episode/#{URI.encode(episode)}")
+    request_api("https://integracion-rick-morty-api.herokuapp.com/api/episode/#{URI.encode(episode)}")
   end
 
   def find_episodebyname(name)
-    request_api("https://rickandmortyapi.com/api/episode/?name=#{URI.encode(name)}")
+    request_api("https://integracion-rick-morty-api.herokuapp.com/api/episode/?name=#{URI.encode(name)}")
   end
 
   def find_characterbyname(name)
-    request_api("https://rickandmortyapi.com/api/character/?name=#{URI.encode(name)}")
+    request_api("https://integracion-rick-morty-api.herokuapp.com/api/character/?name=#{URI.encode(name)}")
   end
 
   def find_locationbyname(name)
-    request_api("https://rickandmortyapi.com/api/location/?name=#{URI.encode(name)}")
+    request_api("https://integracion-rick-morty-api.herokuapp.com/api/location/?name=#{URI.encode(name)}")
   end
 
   def find_allespisodes1
-    request_api("https://rickandmortyapi.com/api/episode/")
+    request_api("https://integracion-rick-morty-api.herokuapp.com/api/episode/")
   end
 
   def find_allepisodes2
-    request_api("https://rickandmortyapi.com/api/episode?page=2")
+    request_api("https://integracion-rick-morty-api.herokuapp.com/api/episode?page=2")
   end
 
   def find_character(character)
